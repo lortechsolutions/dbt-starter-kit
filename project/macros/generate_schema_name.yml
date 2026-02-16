@@ -1,0 +1,15 @@
+version: 2
+
+macros:
+  - name: generate_schema_name
+    description: >
+      Custom schema name generator that:
+      - In prod: uses custom_schema_name if provided, otherwise falls back to target.schema
+      - In dev/other targets: uses target.name (e.g., dbt_joachimhodana) as the schema
+    arguments:
+      - name: custom_schema_name
+        type: string
+        description: Optional custom schema name specified in model config.
+      - name: node
+        type: node
+        description: The dbt node (model/source/etc) being processed.
