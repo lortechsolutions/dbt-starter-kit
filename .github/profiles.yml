@@ -1,0 +1,32 @@
+{# 
+  CI Snowflake profile for dbt builds.
+
+  This profile is intended for CI only and relies on environment variables
+  so that no credentials are committed to the repository.
+
+  Make sure your CI pipeline exports the following environment variables:
+    - DBT_SNOWFLAKE_ACCOUNT
+    - DBT_SNOWFLAKE_USER
+    - DBT_SNOWFLAKE_ROLE
+    - DBT_SNOWFLAKE_WAREHOUSE
+    - DBT_SNOWFLAKE_DATABASE
+    - DBT_SNOWFLAKE_SCHEMA
+    - DBT_SNOWFLAKE_THREADS (optional, defaults to 1)
+    - DBT_SNOWFLAKE_AUTHENTICATOR (optional, defaults to 'externalbrowser')
+    - DBT_SNOWFLAKE_PASSWORD or keypair-related variables, depending on auth strategy
+#}
+
+project:
+  target: ci
+  outputs:
+    ci:
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('DBT_SNOWFLAKE_USER') }}"
+      role: "{{ env_var('DBT_SNOWFLAKE_ROLE') }}"
+      warehouse: "{{ env_var('DBT_SNOWFLAKE_WAREHOUSE') }}"
+      database: "{{ env_var('DBT_SNOWFLAKE_DATABASE') }}"
+      schema: "{{ env_var('DBT_SNOWFLAKE_SCHEMA') }}"
+      threads: "{{ env_var('DBT_SNOWFLAKE_THREADS') or 1 }}"
+      authenticator: "{{ env_var('DBT_SNOWFLAKE_AUTHENTICATOR') or 'externalbrowser' }}"
+
