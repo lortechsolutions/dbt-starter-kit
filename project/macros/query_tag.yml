@@ -1,0 +1,24 @@
+version: 2
+
+macros:
+  - name: build_query_tag
+    description: >
+      Build a Snowflake-compatible query tag string containing functionality and environment
+      information, suitable for observability, cost allocation and debugging.
+    arguments:
+      - name: functionality
+        type: string
+        description: >
+          Logical label for what is being executed (e.g. "model.my_table", "seed.my_seed",
+          "test.unique_orders"). If omitted, the caller can provide a default via var('query_tag').
+
+  - name: set_query_tag
+    description: >
+      Set the Snowflake session query_tag using the build_query_tag macro. Can be wired into
+      global pre-hooks or called ad-hoc in models, seeds, tests, and macros.
+    arguments:
+      - name: functionality
+        type: string
+        description: >
+          Optional functionality label; when not provided, the macro falls back to
+          var('query_tag', 'default').
