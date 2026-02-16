@@ -1,0 +1,14 @@
+packages:
+  - package: dbt-labs/codegen
+    version: 0.14.0
+
+  - package: dbt-labs/dbt_utils
+    version: ">=1.3.0,<2.0.0"
+
+  - package: calogica/dbt_expectations
+    version: ">=0.10.0,<1.0.0"
+
+  # See https://hub.getdbt.com/Matts52/dbt_orphan/latest/
+  - package: Matts52/dbt_orphan
+    version: 0.1.2
+
