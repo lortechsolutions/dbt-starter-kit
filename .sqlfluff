@@ -1,0 +1,12 @@
+[sqlfluff]
+dialect = snowflake
+templater = dbt
+exclude_rules = L009,L027
+
+[sqlfluff:templater:dbt]
+project_dir = project
+
+[sqlfluff:rules]
+tab_space_size = 2
+max_line_length = 100
+
