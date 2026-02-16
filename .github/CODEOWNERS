@@ -1,0 +1,14 @@
+# Example CODEOWNERS file
+# Replace the placeholder teams/users with your real GitHub handles.
+
+# Default owners for everything in this repo
+*       @joachimhodana
+
+# dbt project ownership
+/project/models/      @joachimhodana
+/project/macros/      @joachimhodana
+/project/tests/       @joachimhodana
+
+# CI and infra tooling
+/.github/             @joachimhodana
+
