@@ -1,0 +1,13 @@
+# Minimal example gitleaks configuration for this starter kit.
+# Customize allowlists and rules to match your organisation's standards.
+
+[rules]
+# Use built-in gitleaks rules; this file is mainly a hook for future overrides.
+
+[allowlist]
+description = "Global allowlist for non-sensitive test data, fixtures, etc."
+paths = [
+  '''project/seeds/.*''',
+  '''project/tests/.*''',
+]
+
