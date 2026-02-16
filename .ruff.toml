@@ -1,0 +1,21 @@
+target-version = "py313"
+line-length = 100
+
+[lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "W",   # pycodestyle warnings
+  "I",   # isort
+  "B",   # flake8-bugbear
+  "UP",  # pyupgrade
+]
+ignore = [
+  "E203",  # whitespace before ':', conflicts with Black-style formatting
+  "E501",  # line length (handled more softly, we enforce 100 via tooling/PR review)
+]
+
+[lint.isort]
+known-first-party = ["scripts"]
+combine-as-imports = true
+
