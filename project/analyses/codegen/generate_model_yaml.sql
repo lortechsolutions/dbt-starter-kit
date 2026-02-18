@@ -8,8 +8,17 @@
   your `schema.yml` file.
 #}
 
-{{ codegen.generate_model_yaml(
-    model_name='your_model_name_here',
-    upstream_descriptions=true
-) }}
+{# 
+  NOTE: dbt-codegen introspects the warehouse (columns) to generate YAML.
+  To avoid breaking parsing/compilation in CI tools (e.g. SQLFluff dbt templater),
+  this macro is only executed when `execute` is true.
+#}
+
+{% if execute %}
+  {{ codegen.generate_model_yaml(
+      model_names=['your_model_name_here'],
+      upstream_descriptions=true,
+      include_data_types=true
+  ) }}
+{% endif %}
 

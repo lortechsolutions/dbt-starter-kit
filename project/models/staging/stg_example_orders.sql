@@ -5,10 +5,10 @@
 ) }}
 
 with example_orders as (
-    select
-        1 as order_id,
-        'example'::string as status,
-        current_timestamp() as created_at
+  select
+    1 as order_id,
+    'example'::string as status,
+    current_timestamp() as created_at
 )
 
 select *

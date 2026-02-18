@@ -1,11 +1,23 @@
 extends: default
 
+ignore: |
+  .venv/**
+  project/dbt_packages/**
+  project/dbt_internal_packages/**
+  project/target/**
+  logs/**
+
 rules:
+  document-start: disable
   line-length:
     max: 100
     level: warning
   indentation:
     indent-sequences: consistent
+  empty-lines:
+    max: 1
+    max-start: 0
+    max-end: 1
   truthy:
     allowed-values: ["true", "false", "on", "off", "yes", "no"]
   trailing-spaces:

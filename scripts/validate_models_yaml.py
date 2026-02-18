@@ -19,7 +19,7 @@ import glob
 import pprint
 import re
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import yaml
 from pydantic import BaseModel, Field, ValidationError, field_validator
@@ -48,18 +48,17 @@ class DBTModelColumn(BaseModel):
 class DBTModel(BaseModel):
     name: str = Field(min_length=1)
     description: str = Field(min_length=1)
-    meta: Optional[Dict[str, Any]] = None
+    meta: dict[str, Any] | None = None
     config: DBTModelConfig
-    columns: Optional[list[DBTModelColumn]] = []
-    additional_args: Optional[Dict[str, Any]] = {}
+    columns: list[DBTModelColumn] = Field(default_factory=list)
+    additional_args: dict[str, Any] | None = None
 
 
 POSTFIX_PATTERN = re.compile(r"_v\d+$")
 
 
 def iter_model_sql_files(models_dir: Path):
-    for sql_file in models_dir.rglob("*.sql"):
-        yield sql_file
+    yield from models_dir.rglob("*.sql")
 
 
 def ensure_corresponding_yml_exists(models_dir: Path) -> list[str]:
@@ -74,7 +73,7 @@ def ensure_corresponding_yml_exists(models_dir: Path) -> list[str]:
 
 def validate_yaml_models_in_file(filename: str) -> list[str]:
     errors: list[str] = []
-    with open(filename, "r", encoding="utf-8") as stream:
+    with open(filename, encoding="utf-8") as stream:
         try:
             yaml_file = yaml.safe_load(stream)
         except yaml.YAMLError as exc:

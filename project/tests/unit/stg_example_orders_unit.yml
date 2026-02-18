@@ -2,7 +2,7 @@ version: 2
 
 unit_tests:
   - name: unit_test_stg_example_orders_basic
-    model: ref('stg_example_orders')
+    model: stg_example_orders
 
     given:
       - input: ref('stg_example_orders')

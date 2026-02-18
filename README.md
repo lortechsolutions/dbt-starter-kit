@@ -62,10 +62,7 @@ After you update the placeholders and install dependencies into your environment
 
 - **dbt_orphan** – automatic cleanup of orphaned tables in dbt-managed schemas.  
   - Included via [`Matts52/dbt_orphan`](https://hub.getdbt.com/Matts52/dbt_orphan/latest/).  
-  - Enabled via `on-run-end` in `project/dbt_project.yml` (defaults to `dry_run=true` and current `target.schema`). Configure behavior via vars:
-    - `orphan_cleanup_schemas`
-    - `orphan_cleanup_dry_run`
-    - `orphan_cleanup_exclude_patterns`
+  - Enabled via `on-run-end` in `project/dbt_project.yml` and configured for `staging`, `intermediate`, `marts` with `dry_run=false`.
 - **Data quality & observability** around this starter:
   - **dbt-expectations** (already wired in) for richer tests directly in dbt.
   - **re_data** or **Soda Core** if you want separate monitoring/anomaly dashboards on top of dbt runs.
