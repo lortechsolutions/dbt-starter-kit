@@ -19,8 +19,9 @@ snapshot-paths: ["snapshots"]
 
 on-run-end:
   - "{{ dbt_orphan.cleanup_orphans(
-        schemas=['staging', 'intermediate', 'marts'],
-        dry_run=false
+        schemas=var('orphan_cleanup_schemas', [target.schema]),
+        dry_run=var('orphan_cleanup_dry_run', true),
+        exclude_patterns=var('orphan_cleanup_exclude_patterns', ['%_backup', 'tmp_%'])
       ) }}"
 
 clean-targets:         # directories to be removed by `dbt clean`
