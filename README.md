@@ -57,18 +57,15 @@ After you update the placeholders and install dependencies into your environment
   - See `set_query_tag` wiring in `project/dbt_project.yml`.
 - **Codegen helpers**:
   - `project/analyses/codegen/generate_model_yaml.sql`
-  - `project/analyses/codegen/generate_unit_test_template.sql`
 
 ### Recommended ecosystem add-ons
 
 - **dbt_orphan** – automatic cleanup of orphaned tables in dbt-managed schemas.  
-  - Already included (commented example hook) via [`Matts52/dbt_orphan`](https://hub.getdbt.com/Matts52/dbt_orphan/latest/).  
-  - Start with `dry_run=true` and an explicit list of schemas; only enable dropping after reviewing results.
+  - Included via [`Matts52/dbt_orphan`](https://hub.getdbt.com/Matts52/dbt_orphan/latest/).  
+  - Enabled via `on-run-end` in `project/dbt_project.yml` and configured for `staging`, `intermediate`, `marts` with `dry_run=false`.
 - **Data quality & observability** around this starter:
   - **dbt-expectations** (already wired in) for richer tests directly in dbt.
   - **re_data** or **Soda Core** if you want separate monitoring/anomaly dashboards on top of dbt runs.
-- **Local dev & experimentation**:
-  - **DuckDB** as an additional dev target for cheap local iteration before running on Snowflake.
 - **Orchestration & ingestion**:
   - Tools like **Dagster/Prefect** (for orchestration) or **dlt/Meltano** (for ingestion) pair well with this dbt starter but live outside this repo.
 
